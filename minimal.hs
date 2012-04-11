@@ -15,7 +15,6 @@ mkYesod "Minimal" [parseRoutes|
 |]
 
 instance Yesod Minimal where 
-    approot _            = ""
     defaultLayout widget = do
         pc <- widgetToPageContent widget
         hamletToRepHtml [hamlet|
