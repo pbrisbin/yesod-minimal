@@ -18,8 +18,7 @@ mkYesod "Minimal" [parseRoutes|
 
 type Form x = Html -> MForm Minimal Minimal (FormResult x, Widget)
 
-instance Yesod Minimal where 
-    approot _            = ""
+instance Yesod Minimal where
     defaultLayout widget = do
         pc <- widgetToPageContent widget
         hamletToRepHtml [hamlet|
@@ -55,7 +54,10 @@ theForm = renderDivs $ TheForm
 
     where
         selectFruit :: Field Minimal Minimal Fruit
-        selectFruit = selectField [("apple", Apple), ("orange", Orange), ("pear", Pear)]
+        selectFruit = selectField $ return $ mkOptionList [ Option "Apple" Apple "apple"
+                                                          , Option "Orange" Orange "orange"
+                                                          , Option "Pear" Pear "pear"
+                                                          ]
 
 getRootR :: Handler RepHtml
 getRootR = do
