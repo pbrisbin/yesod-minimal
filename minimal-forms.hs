@@ -18,7 +18,7 @@ mkYesod "Minimal" [parseRoutes|
 
 type Form x = Html -> MForm Minimal Minimal (FormResult x, Widget)
 
-instance Yesod Minimal where 
+instance Yesod Minimal where
     defaultLayout widget = do
         pc <- widgetToPageContent widget
         hamletToRepHtml [hamlet|
