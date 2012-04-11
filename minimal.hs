@@ -14,8 +14,7 @@ mkYesod "Minimal" [parseRoutes|
     / RootR GET
 |]
 
-instance Yesod Minimal where 
-    approot _            = ""
+instance Yesod Minimal where
     defaultLayout widget = do
         pc <- widgetToPageContent widget
         hamletToRepHtml [hamlet|
@@ -35,7 +34,6 @@ instance Yesod Minimal where
 getRootR :: Handler RepHtml
 getRootR = defaultLayout $ do
     setTitle "My title"
-    
     [whamlet|<p>Hello world|]
 
 main :: IO ()
