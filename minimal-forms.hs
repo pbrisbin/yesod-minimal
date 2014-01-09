@@ -39,7 +39,7 @@ instance Yesod Minimal where
 instance RenderMessage Minimal FormMessage where
     renderMessage _ _ = defaultFormMessage
 
-data Fruit = Apple | Orange | Pear deriving (Eq, Ord, Read, Show)
+data Fruit = Apple | Orange | Pear deriving (Eq, Show, Enum, Bounded)
 
 data TheForm = TheForm
     { formText  :: Text
@@ -55,7 +55,7 @@ theForm = renderDivs $ TheForm
 
     where
         selectFruit :: Field Minimal Minimal Fruit
-        selectFruit = selectField [("apple", Apple), ("orange", Orange), ("pear", Pear)]
+        selectFruit = selectField $ optionsEnum
 
 getRootR :: Handler RepHtml
 getRootR = do
